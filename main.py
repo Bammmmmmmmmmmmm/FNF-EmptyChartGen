@@ -1,13 +1,6 @@
 import json
 
 songName = ""
-    
-def kadeEngineQuestion():
-    print("Are you using Kade Engine?")
-    response = ''
-    while response.lower() not in {"yes", "no"}:
-        response = input("Please enter yes or no: ")
-    return response.lower()
 def playerOneQuestion():
     print("What's the name of player1? (bf side)")
     response = ''
@@ -16,6 +9,18 @@ def playerOneQuestion():
     return response.lower()
 def playerTwoQuestion():
     print("What's the name of player2? (dad/enemy side)")
+    response = ''
+    while response.lower() ==  "":
+        response = input("")
+    return response.lower()
+def gfVersionQuestion():
+    print("What's the name of gf?")
+    response = ''
+    while response.lower() ==  "":
+        response = input("")
+    return response.lower()
+def stageQuestion():
+    print("What's the name of the stage?")
     response = ''
     while response.lower() ==  "":
         response = input("")
@@ -65,14 +70,28 @@ def saveFileQuestion():
         response = input("Please enter yes or no: ")
     return response.lower()
 
+
+def noteRGBQuestion():
+    print("Do you wanna disable the Note RGB Shader?")
+    response = ''
+    while response not in {"true", "false", "yes", "no", True, False}:
+        response = input("Please enter yes or no: ")
+        if response == "yes" or response == "true":
+            response =  True
+        elif response == "no" or response == "false":
+            response = False
+    return response
+
+
 songName = songQuestion()
 exportSongName = songName.lower()
 
-if kadeEngineQuestion() == "yes":
+
     chart = {
     "song": {
         "player2": playerTwoQuestion(),
         "player1": playerOneQuestion(),
+        "gfVersion": gfVersionQuestion(),
         "stage": stageQuestion(),
         "speed": scrollSpeedQuestion(),
         "needsVoices": needsVoicesQuestion(),
@@ -81,22 +100,8 @@ if kadeEngineQuestion() == "yes":
         "notes": [],
         "bpm": bpmQuestion(),
         "sections": 0,
-        "validScore": True
-        }
-    }
-else:
-    chart = {
-    "song": {
-        "player2": playerTwoQuestion(),
-        "player1": playerOneQuestion(),
-        "speed": scrollSpeedQuestion(),
-        "needsVoices": needsVoicesQuestion(),
-        "sectionLengths": [],
-        "song": songName,
-        "notes": [],
-        "bpm": bpmQuestion(),
-        "sections": 0,
-        "validScore": True
+        "validScore": True,
+        "disableNoteRGB": noteRGBQustion()
         }
     }
 if saveFileQuestion() == "yes":
